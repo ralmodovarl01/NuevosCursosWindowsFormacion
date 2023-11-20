@@ -59,6 +59,11 @@
             this.apellidosTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.cursoComboBox = new System.Windows.Forms.ComboBox();
+            this.btnCambiar = new System.Windows.Forms.Button();
+            this.fdCaratula = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cURSOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cURSOSTableAdapter = new NuevosCursosWindowsFormacion.gcfdTableAdapters.CURSOSTableAdapter();
             id_AlumnoLabel = new System.Windows.Forms.Label();
             dniLabel = new System.Windows.Forms.Label();
             nombreLabel = new System.Windows.Forms.Label();
@@ -69,6 +74,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingNavigator)).BeginInit();
             this.aLUMNOSBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cURSOSBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // id_AlumnoLabel
@@ -153,7 +160,7 @@
             this.aLUMNOSBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
             this.aLUMNOSBindingNavigator.BindingSource = this.aLUMNOSBindingSource;
             this.aLUMNOSBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.aLUMNOSBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.aLUMNOSBindingNavigator.DeleteItem = null;
             this.aLUMNOSBindingNavigator.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.aLUMNOSBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
@@ -203,6 +210,7 @@
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorDeleteItem.Text = "Eliminar";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -317,17 +325,50 @@
             // cursoComboBox
             // 
             this.cursoComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.aLUMNOSBindingSource, "Curso", true));
+            this.cursoComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.aLUMNOSBindingSource, "Curso", true));
+            this.cursoComboBox.DataSource = this.cURSOSBindingSource;
+            this.cursoComboBox.DisplayMember = "Nombre_Curso";
             this.cursoComboBox.FormattingEnabled = true;
             this.cursoComboBox.Location = new System.Drawing.Point(195, 384);
             this.cursoComboBox.Name = "cursoComboBox";
             this.cursoComboBox.Size = new System.Drawing.Size(346, 24);
             this.cursoComboBox.TabIndex = 12;
+            this.cursoComboBox.ValueMember = "Id_Curso";
+            // 
+            // btnCambiar
+            // 
+            this.btnCambiar.Location = new System.Drawing.Point(663, 332);
+            this.btnCambiar.Name = "btnCambiar";
+            this.btnCambiar.Size = new System.Drawing.Size(127, 54);
+            this.btnCambiar.TabIndex = 13;
+            this.btnCambiar.Text = "Cambiar";
+            this.btnCambiar.UseVisualStyleBackColor = true;
+            this.btnCambiar.Click += new System.EventHandler(this.btnCambiar_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(807, 56);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(299, 255);
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
+            // cURSOSBindingSource
+            // 
+            this.cURSOSBindingSource.DataMember = "CURSOS";
+            this.cURSOSBindingSource.DataSource = this.gcfd;
+            // 
+            // cURSOSTableAdapter
+            // 
+            this.cURSOSTableAdapter.ClearBeforeFill = true;
             // 
             // FormAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 469);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnCambiar);
             this.Controls.Add(id_AlumnoLabel);
             this.Controls.Add(this.id_AlumnoTextBox);
             this.Controls.Add(dniLabel);
@@ -350,6 +391,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingNavigator)).EndInit();
             this.aLUMNOSBindingNavigator.ResumeLayout(false);
             this.aLUMNOSBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cURSOSBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -380,5 +423,10 @@
         private System.Windows.Forms.TextBox apellidosTextBox;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.ComboBox cursoComboBox;
+        private System.Windows.Forms.Button btnCambiar;
+        private System.Windows.Forms.OpenFileDialog fdCaratula;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.BindingSource cURSOSBindingSource;
+        private gcfdTableAdapters.CURSOSTableAdapter cURSOSTableAdapter;
     }
 }

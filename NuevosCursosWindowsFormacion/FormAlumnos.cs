@@ -27,8 +27,25 @@ namespace NuevosCursosWindowsFormacion
 
         private void FormAlumnos_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'gcfd.CURSOS' Puede moverla o quitarla según sea necesario.
+            this.cURSOSTableAdapter.Fill(this.gcfd.CURSOS);
             // TODO: esta línea de código carga datos en la tabla 'gcfd.ALUMNOS' Puede moverla o quitarla según sea necesario.
             this.aLUMNOSTableAdapter.Fill(this.gcfd.ALUMNOS);
+
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCambiar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dameCursos()
+        {
 
         }
     }

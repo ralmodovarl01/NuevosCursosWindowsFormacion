@@ -37,6 +37,41 @@ namespace NuevosCursosWindowsFormacion
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
 
+            int position = int.Parse(aLUMNOSBindingNavigator.PositionItem.Text) - 1;
+            int? curso = gcfd.ALUMNOS[position].IsCursoNull() ? (int?)null : gcfd.ALUMNOS[position].Curso;
+
+            // Si el alumno está apuntado a un curso, se debe avisar de ello y preguntar de nuevo al usuario.
+            // Solamente en caso de que vuelva a contestar afirmativamente, se eliminará al alumno de la BD.
+            if (curso != null)
+            {
+                DialogResult resultCurso = MessageBox.Show("El alumno está apuntado a un Curso, ¿Desea Eliminarlo?", "Eliminar Alumno", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (resultCurso == DialogResult.Yes)
+                {
+                    EliminarAlumno(curso.Value);
+                    MessageBox.Show("Alumno asociado eliminado correctamente");
+                }
+                else
+                {
+                    EliminarAlumno(curso);
+                }
+            }
+           
+
+        }
+
+
+        private void EliminarAlumno(int? curso)
+        {
+            gcfdTableAdapters.ALUMNOSTableAdapter alumnos = new gcfdTableAdapters.ALUMNOSTableAdapter();
+
+            // Verificar si curso es null antes de llamar al método DeleteQueryAlumno
+            if (curso != null)
+            {
+                alumnos.DeleteQueryAlumno(curso.Value);
+            }
+
+            this.gcfd.ALUMNOS.AcceptChanges();
+            this.aLUMNOSTableAdapter.Fill(this.gcfd.ALUMNOS);
         }
 
         private void btnCambiar_Click(object sender, EventArgs e)
@@ -44,9 +79,9 @@ namespace NuevosCursosWindowsFormacion
 
         }
 
-        private void dameCursos()
-        {
+        
+        
 
-        }
+        
     }
 }

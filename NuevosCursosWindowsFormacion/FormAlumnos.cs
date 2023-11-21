@@ -76,7 +76,11 @@ namespace NuevosCursosWindowsFormacion
 
         private void btnCambiar_Click(object sender, EventArgs e)
         {
+            if (fdCaratula.ShowDialog() == DialogResult.OK)
+            {
 
+                pictureBox1.Image = Image.FromFile(fdCaratula.FileName);
+            }
         }
 
         

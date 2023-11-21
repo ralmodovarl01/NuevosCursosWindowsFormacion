@@ -23,6 +23,22 @@ namespace NuevosCursosWindowsFormacion
             this.aLUMNOSBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.gcfd);
 
+            gcfd ds = new gcfd();
+            gcfdTableAdapters.ALUMNOSTableAdapter sta = new gcfdTableAdapters.ALUMNOSTableAdapter();
+
+            sta.FillByDni(ds.ALUMNOS, dniTextBox.Text);
+
+            if (ds.ALUMNOS.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("Este Usuario ya existe,¿Estás seguro de que deseas modificar el registro?", "Modificar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                if (result == DialogResult.OK)
+                {
+                    gcfd nuevo = new gcfd();
+                    gcfdTableAdapters.ALUMNOSTableAdapter otro = new gcfdTableAdapters.ALUMNOSTableAdapter();
+                    // otro.UpdateQueryAlumno(nuevo.ALUMNOS,dniTextBox.Text,nombreTextBox.Text,apellidosTextBox.Text,emailTextBox.Text,cursoComboBox.Text);
+                }
+            }
         }
 
         private void FormAlumnos_Load(object sender, EventArgs e)

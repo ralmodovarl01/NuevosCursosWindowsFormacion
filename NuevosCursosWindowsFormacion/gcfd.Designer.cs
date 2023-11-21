@@ -2352,7 +2352,7 @@ SELECT Id_Alumno, Dni, Nombre, Apellidos, Email, Curso, Foto FROM ALUMNOS WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id_Alumno, Dni, Nombre, Apellidos, Email, Curso, Foto FROM dbo.ALUMNOS";
@@ -2362,6 +2362,12 @@ SELECT Id_Alumno, Dni, Nombre, Apellidos, Email, Curso, Foto FROM ALUMNOS WHERE 
             this._commandCollection[1].CommandText = "DELETE FROM ALUMNOS\r\nWHERE  (Id_Alumno = @Original_Id_Alumno)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id_Alumno", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id_Alumno", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT Id_Alumno, Dni, Nombre, Apellidos, Email, Curso, Foto\r\nFROM     ALUMNOS\r\nW" +
+                "HERE  (Dni = @Param2)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "Dni", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2383,6 +2389,42 @@ SELECT Id_Alumno, Dni, Nombre, Apellidos, Email, Curso, Foto FROM ALUMNOS WHERE 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual gcfd.ALUMNOSDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            gcfd.ALUMNOSDataTable dataTable = new gcfd.ALUMNOSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByDni(gcfd.ALUMNOSDataTable dataTable, string Param2) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((Param2 == null)) {
+                throw new global::System.ArgumentNullException("Param2");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Param2));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual gcfd.ALUMNOSDataTable GetDataBy1(string Param2) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((Param2 == null)) {
+                throw new global::System.ArgumentNullException("Param2");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Param2));
+            }
             gcfd.ALUMNOSDataTable dataTable = new gcfd.ALUMNOSDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
